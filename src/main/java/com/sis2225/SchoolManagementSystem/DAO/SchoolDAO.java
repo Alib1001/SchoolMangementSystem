@@ -1,10 +1,6 @@
 package com.sis2225.SchoolManagementSystem.DAO;
 
-import com.sis2225.SchoolManagementSystem.School;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import com.sis2225.SchoolManagementSystem.Models.School;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

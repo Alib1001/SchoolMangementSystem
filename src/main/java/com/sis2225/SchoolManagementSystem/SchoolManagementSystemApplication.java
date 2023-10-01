@@ -1,17 +1,12 @@
 package com.sis2225.SchoolManagementSystem;
 
-import com.sis2225.SchoolManagementSystem.DAO.SchoolDAO;
+import com.sis2225.SchoolManagementSystem.Models.School;
+import com.sis2225.SchoolManagementSystem.Models.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.Blob;
-import java.sql.SQLException;
 
 @SpringBootApplication
 public class SchoolManagementSystemApplication {
@@ -33,6 +28,14 @@ public class SchoolManagementSystemApplication {
 		School school5 = new School(3, "Общеобразовательная школа #5",
 				"Общеобразовательная школа",
 				"Общее направление", "КызылОрда","1696054093216_skipper.jpg");
+
+		Student student1 = new Student("Alibek", "Nurdaulet",18,11);
+		Student student2 = new Student("Baka", "Durachkov",17,11);
+		Student student3 = new Student("Сырна", "Сырный",16,11);
+
+		gim60School.addStudent(student1);
+		school5.addStudent(student2);
+		school45.addStudent(student3);
 
 
 		session.persist(gim60School);

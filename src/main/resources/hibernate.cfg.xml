@@ -20,7 +20,8 @@
 
         <property name="hibernate.hbm2ddl.auto">create</property>
 
-        <mapping class="com.sis2225.SchoolManagementSystem.School"/>
+        <mapping class="com.sis2225.SchoolManagementSystem.Models.School"/>
+        <mapping class="com.sis2225.SchoolManagementSystem.Models.Student"/>
 
 
     </session-factory>

@@ -1,4 +1,4 @@
-package com.sis2225.SchoolManagementSystem;
+package com.sis2225.SchoolManagementSystem.Models;
 
 import jakarta.persistence.*;
 

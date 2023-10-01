@@ -1,14 +1,11 @@
-package com.sis2225.SchoolManagementSystem;
+package com.sis2225.SchoolManagementSystem.Models;
 
-public class Admin {
+public class Manager {
     public final static String role = "admin";
     String username = "Admin";
     String password = "1001";
 
-    public Admin() {
+    public Manager() {
 
     }
-
-
-
 }
