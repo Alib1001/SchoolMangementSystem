@@ -5,13 +5,17 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "teachers")
 public class Teacher {
-
     private final static String role = "Teacher";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teacher_id")
     private int id;
+
+    @Column(name = "username")
+    private String username;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "first_name")
     private String firstName;
@@ -30,6 +34,42 @@ public class Teacher {
     public int getId() {
         return id;
     }
+
+    public void setId(int id) {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
 
     public String getFirstName() {
         return firstName;

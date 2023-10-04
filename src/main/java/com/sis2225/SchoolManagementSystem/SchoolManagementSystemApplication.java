@@ -7,7 +7,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableTransactionManagement
 @SpringBootApplication
 public class SchoolManagementSystemApplication {
 
@@ -30,8 +32,12 @@ public class SchoolManagementSystemApplication {
 				"Общее направление", "КызылОрда","1696054093216_skipper.jpg");
 
 		Student student1 = new Student("Alibek", "Nurdaulet",18,11);
+		student1.setUsername("bakaasdf");
+		student1.setPassword("asdfasdf");
 		Student student2 = new Student("Baka", "Durachkov",17,11);
 		Student student3 = new Student("Сырна", "Сырный",16,11);
+
+
 
 		gim60School.addStudent(student1);
 		school5.addStudent(student2);

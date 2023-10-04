@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +22,7 @@ public class StudentDAO {
     }
 
     public List<Student> getAllStudents() {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         return session.createQuery("FROM Student", Student.class).getResultList();
     }
 
@@ -30,32 +31,18 @@ public class StudentDAO {
         return session.get(Student.class, id);
     }
 
-    @Transactional
-    public void addStudent(Student student) {
-        Session session = sessionFactory.getCurrentSession();
-        session.save(student);
-    }
+    public Student login(String username, String password) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Student> query = session.createQuery("FROM Student WHERE username = :username AND password = :password", Student.class);
+            query.setParameter("username", username);
+            query.setParameter("password", password);
 
-    @Transactional
-    public void updateStudent(int id, Student student) {
-        Session session = sessionFactory.getCurrentSession();
-        Student existingStudent = session.get(Student.class, id);
-        if (existingStudent != null) {
-            existingStudent.setFirstName(student.getFirstName());
-            existingStudent.setLastName(student.getLastName());
-            existingStudent.setAge(student.getAge());
-            existingStudent.setId(student.getId());
-            existingStudent.setGrade(student.getGrade());
-            existingStudent.setDescription(student.getDescription());
+            Student student = query.uniqueResult();
+            return student;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-    }
 
-    @Transactional
-    public void deleteStudent(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        Student student = session.get(Student.class, id);
-        if (student != null) {
-            session.delete(student);
-        }
     }
 }

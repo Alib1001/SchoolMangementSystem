@@ -38,6 +38,7 @@ public class School {
 
     @Column (name = "imguri")
     private String imguri;
+
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Student> students = new ArrayList<>();
 

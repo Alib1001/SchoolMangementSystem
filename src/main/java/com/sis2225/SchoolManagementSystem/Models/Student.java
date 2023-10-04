@@ -1,16 +1,24 @@
 package com.sis2225.SchoolManagementSystem.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "students")
 public class Student {
 
+    private final static String ROLE = "Student";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
     @Column(name = "firstName")
     private String firstName;
 
@@ -19,15 +27,16 @@ public class Student {
 
     @Column(name = "age")
     private int age;
-
     @Column(name = "grade")
     private int grade;
 
-    @Column(name = "description")
+    @Column (name = "description")
     private String description;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "school_id")
+    @JoinColumn(name = "school_id")  // This should match the name of the foreign key column in the students table
+    @JsonIgnore
     private School school;
 
     public School getSchool() {
@@ -36,6 +45,23 @@ public class Student {
 
     public void setSchool(School school) {
         this.school = school;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     public void setId(int id) {
         this.id = id;

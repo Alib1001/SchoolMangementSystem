@@ -16,6 +16,7 @@ public class SchoolController {
     public SchoolController(SchoolDAO schoolDAO) {
         this.schoolDAO = schoolDAO;
     }
+
     @GetMapping("/schoolList")
     public List<School> listSchools() {
         return schoolDAO.getAllSchools();
