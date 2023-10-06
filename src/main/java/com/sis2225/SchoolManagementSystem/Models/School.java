@@ -40,17 +40,17 @@ public class School {
     private String imguri;
 
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Student> students = new ArrayList<>();
+    private List<SysUser> users = new ArrayList<>();
 
     public School() {
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public List<SysUser> getUsers() {
+        return users;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public void setStudents(List<SysUser> users) {
+        this.users = users;
     }
 
     public String getDescription() {
@@ -98,14 +98,14 @@ public class School {
         this.imguri = imguri;
     }
 
-    public void addStudent(Student student) {
-        students.add(student);
-        student.setSchool(this);
+    public void addStudent(SysUser user) {
+        users.add(user);
+        user.setSchool(this);
     }
 
-    public void removeStudent(Student student) {
-        students.remove(student);
-        student.setSchool(null);
+    public void removeStudent(SysUser user) {
+        users.remove(user);
+        user.setSchool(null);
     }
 
 
