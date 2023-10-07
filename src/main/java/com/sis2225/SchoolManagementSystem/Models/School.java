@@ -42,6 +42,7 @@ public class School {
     @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SysUser> users = new ArrayList<>();
 
+
     public School() {
     }
 
@@ -49,7 +50,7 @@ public class School {
         return users;
     }
 
-    public void setStudents(List<SysUser> users) {
+    public void setUsers(List<SysUser> users) {
         this.users = users;
     }
 
@@ -98,12 +99,12 @@ public class School {
         this.imguri = imguri;
     }
 
-    public void addStudent(SysUser user) {
+    public void addUser(SysUser user) {
         users.add(user);
         user.setSchool(this);
     }
 
-    public void removeStudent(SysUser user) {
+    public void removeUser(SysUser user) {
         users.remove(user);
         user.setSchool(null);
     }

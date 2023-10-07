@@ -1,5 +1,7 @@
 package com.sis2225.SchoolManagementSystem.DAO;
 
+import com.sis2225.SchoolManagementSystem.Models.School;
+import com.sis2225.SchoolManagementSystem.Models.Student;
 import com.sis2225.SchoolManagementSystem.Models.SysUser;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -9,6 +11,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class SysUserDAO {
@@ -31,6 +35,18 @@ public class SysUserDAO {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public List<SysUser> getAllUsers() {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("FROM SysUser", SysUser.class).list();
+        }
+    }
+
+    public SysUser getUserById(int id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(SysUser.class, id);
         }
     }
 }

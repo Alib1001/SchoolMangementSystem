@@ -8,16 +8,19 @@ public class Student extends SysUser {
 
     private final static String ROLE = "Student";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
     @Column(name = "age")
     private int age;
 
-    @Column(name = "grade")
-    private int grade;
+    public String getClas() {
+        return clas;
+    }
+
+    public void setClas(String clas) {
+        this.clas = clas;
+    }
+
+    @Column(name = "clas")
+    private String clas;
 
     @Column(name = "description")
     private String description;
@@ -25,16 +28,12 @@ public class Student extends SysUser {
     public Student() {
     }
 
-    public int getId() {
-        return id;
-    }
-
     public int getAge() {
         return age;
     }
 
-    public int getGrade() {
-        return grade;
+    public String getGrade() {
+        return clas;
     }
 
     public String getDescription() {
@@ -49,13 +48,13 @@ public class Student extends SysUser {
         this.age = age;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
+    public void setGrade(String grade) {
+        this.clas = grade;
     }
 
-    public Student(String firstName, String lastName, int age, int grade) {
-        super(firstName, lastName);
+    public Student(String firstName, String lastName, int age, String clas) {
+        super(firstName, lastName,ROLE);
         this.age = age;
-        this.grade = grade;
+        this.clas = clas;
     }
 }

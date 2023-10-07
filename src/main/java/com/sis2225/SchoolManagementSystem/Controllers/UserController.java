@@ -1,8 +1,6 @@
     package com.sis2225.SchoolManagementSystem.Controllers;
 
     import com.sis2225.SchoolManagementSystem.DAO.SysUserDAO;
-    import com.sis2225.SchoolManagementSystem.Models.Student;
-    import com.sis2225.SchoolManagementSystem.DAO.StudentDAO;
     import com.sis2225.SchoolManagementSystem.Models.SysUser;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.http.HttpStatus;
@@ -29,6 +27,16 @@
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }
+        }
+
+        @GetMapping("/userList")
+        public List<SysUser> getAllStudents() {
+            return sysUserDAO.getAllUsers();
+        }
+
+        @GetMapping("/{id}")
+        public SysUser getStudentById(@PathVariable int id) {
+            return sysUserDAO.getUserById(id);
         }
     }
 

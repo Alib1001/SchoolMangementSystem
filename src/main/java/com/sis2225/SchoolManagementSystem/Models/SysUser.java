@@ -92,8 +92,9 @@ public class SysUser {
         this.role = role;
     }
 
-    public SysUser(String firstName, String lastName) {
+    public SysUser(String firstName, String lastName,String role) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = role;
     }
 }
