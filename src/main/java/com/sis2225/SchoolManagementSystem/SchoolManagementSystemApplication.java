@@ -1,9 +1,6 @@
 	package com.sis2225.SchoolManagementSystem;
 
-	import com.sis2225.SchoolManagementSystem.Models.School;
-	import com.sis2225.SchoolManagementSystem.Models.Student;
-	import com.sis2225.SchoolManagementSystem.Models.SysUser;
-	import com.sis2225.SchoolManagementSystem.Models.Teacher;
+	import com.sis2225.SchoolManagementSystem.Models.*;
 	import org.hibernate.Session;
 	import org.hibernate.SessionFactory;
 	import org.hibernate.cfg.Configuration;
@@ -39,21 +36,25 @@
 					"Общеобразовательная школа",
 					"Общее направление", "КызылОрда","1696054093216_skipper.jpg");
 
-			SysUser student1 = new Student("Alibek", "Nurdaulet",18,"11A");
-			student1.setUsername("baka");
-			student1.setPassword("11111");
-			SysUser student2 = new Student("Baka", "Durachkov",17,"11A");
-			SysUser student3 = new Student("Сырна", "Сырный",16,"10B");
-			SysUser teacher1 = new Teacher("Физрук","Спортивныч",46,"Физра",teach1Classes,
-					"Не строгий");
-			teacher1.setUsername("fizra");
-			teacher1.setPassword("11111");
+			SysUser manager = new Manager();
+
+			SysUser student1 = new Student("Alibek", "Nurdaulet",18,"11A",
+					"baka","11111");
+			SysUser student2 = new Student("Baka", "Durachkov",17,"11A",
+					"baka1","11111");
+			SysUser student3 = new Student("Сырна", "Сырный",16,"10B",
+					"baka3","11111");
+			SysUser teacher1 = new Teacher("Физрук","Спортивныч",46,
+					"Физра",teach1Classes, "Не строгий","fizra","1111");
 
 			gim60School.addUser(student1);
 			school5.addUser(student2);
 			school45.addUser(student3);
 			gim60School.addUser(teacher1);
 
+			gim60School.addUser(manager);
+
+			session.persist(manager);
 
 			session.persist(student1);
 			session.persist(student3);

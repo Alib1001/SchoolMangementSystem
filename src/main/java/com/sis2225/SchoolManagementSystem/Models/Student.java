@@ -52,8 +52,8 @@ public class Student extends SysUser {
         this.clas = grade;
     }
 
-    public Student(String firstName, String lastName, int age, String clas) {
-        super(firstName, lastName,ROLE);
+    public Student(String firstName, String lastName, int age, String clas,String username, String password) {
+        super(firstName, lastName,ROLE,username,password);
         this.age = age;
         this.clas = clas;
     }

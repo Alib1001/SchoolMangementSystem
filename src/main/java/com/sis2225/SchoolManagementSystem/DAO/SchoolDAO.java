@@ -22,4 +22,34 @@ public class SchoolDAO {
             return session.createQuery("FROM School", School.class).list();
         }
     }
+
+    public void addSchool(School school) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(school);
+            session.getTransaction().commit();
+        }
+    }
+    public void updateSchool(School school) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(school);
+            session.getTransaction().commit();
+        }
+    }
+
+    public void deleteSchool(int id) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            School school = session.get(School.class, id);
+            if (school != null) {
+                session.delete(school);
+            }
+            session.getTransaction().commit();
+        }
+    }
+
+
+
+
 }

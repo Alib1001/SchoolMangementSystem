@@ -20,7 +20,7 @@
         <mapping class="com.sis2225.SchoolManagementSystem.Models.Student"/>
         <mapping class="com.sis2225.SchoolManagementSystem.Models.SysUser"/>
         <mapping class="com.sis2225.SchoolManagementSystem.Models.Teacher"/>
-
+        <mapping class="com.sis2225.SchoolManagementSystem.Models.Manager"/>
 
 
     </session-factory>

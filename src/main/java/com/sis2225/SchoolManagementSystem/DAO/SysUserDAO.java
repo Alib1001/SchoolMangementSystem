@@ -49,4 +49,37 @@ public class SysUserDAO {
             return session.get(SysUser.class, id);
         }
     }
+
+    @Transactional
+    public void addUser(SysUser user) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.save(user);
+            session.getTransaction().commit();
+        }
+    }
+
+    @Transactional
+    public void updateUser(SysUser user) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(user);
+            session.getTransaction().commit();
+        }
+    }
+
+    @Transactional
+    public void deleteUser(int userId) {
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            SysUser user = session.get(SysUser.class, userId);
+            if (user != null) {
+                session.delete(user);
+            }
+            session.getTransaction().commit();
+        }
+    }
+
+
+
 }

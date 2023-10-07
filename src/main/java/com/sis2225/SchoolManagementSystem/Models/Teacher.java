@@ -1,7 +1,5 @@
 package com.sis2225.SchoolManagementSystem.Models;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -11,9 +9,7 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "Teacher")
 public class Teacher extends SysUser {
-
     private final static String ROLE = "Teacher";
-
     @Column(name = "age")
     private int age;
     @Column(name = "subject")
@@ -63,8 +59,8 @@ public class Teacher extends SysUser {
 
 
     public Teacher(String firstName, String lastName, int age, String subject, ArrayList<String> classes,
-                   String description) {
-        super(firstName, lastName, ROLE);
+                   String description,String username, String password) {
+        super(firstName, lastName, ROLE,username,password);
         this.age = age;
         this.subject = subject;
         this.classes = classes;

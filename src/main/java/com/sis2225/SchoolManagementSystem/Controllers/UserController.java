@@ -38,5 +38,45 @@
         public SysUser getStudentById(@PathVariable int id) {
             return sysUserDAO.getUserById(id);
         }
+
+        @PostMapping("/addUser")
+        public ResponseEntity<Void> addUser(@RequestBody SysUser user) {
+            try {
+                sysUserDAO.addUser(user);
+                return ResponseEntity.status(HttpStatus.CREATED).build();
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        }
+        @PutMapping("/updateUser/{id}")
+        public ResponseEntity<Void> updateUser(@PathVariable int id, @RequestBody SysUser updatedUser) {
+            try {
+                SysUser existingUser = sysUserDAO.getUserById(id);
+                if (existingUser != null) {
+                    updatedUser.setId(id);
+                    sysUserDAO.updateUser(updatedUser);
+                    return ResponseEntity.ok().build();
+                } else {
+                    return ResponseEntity.notFound().build();
+                }
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        }
+
+        @DeleteMapping("/deleteUser/{id}")
+        public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+            try {
+                SysUser existingUser = sysUserDAO.getUserById(id);
+                if (existingUser != null) {
+                    sysUserDAO.deleteUser(id);
+                    return ResponseEntity.ok().build();
+                } else {
+                    return ResponseEntity.notFound().build();
+                }
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        }
     }
 

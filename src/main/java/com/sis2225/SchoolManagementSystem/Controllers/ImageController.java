@@ -58,4 +58,45 @@ public class ImageController {
             return "БАКА.Ошибка при загрузке изображения";
         }
     }
+
+    @PutMapping("/update/{imageName}")
+    public ResponseEntity<String> updateImage(@PathVariable String imageName, @RequestParam("file") MultipartFile file) {
+        try {
+            Path imagePath = Paths.get(uploadDir, imageName);
+
+            if (Files.exists(imagePath)) {
+                String newFileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+                Path newFilePath = Paths.get(uploadDir, newFileName);
+
+                Files.copy(file.getInputStream(), newFilePath, StandardCopyOption.REPLACE_EXISTING);
+                Files.delete(imagePath);
+
+                return ResponseEntity.ok("/api/images/" + newFileName);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Ошибка при обновлении изображения");
+        }
+    }
+
+    @DeleteMapping("/delete/{imageName}")
+    public ResponseEntity<String> deleteImage(@PathVariable String imageName) {
+        try {
+            Path imagePath = Paths.get(uploadDir, imageName);
+
+            if (Files.exists(imagePath)) {
+                Files.delete(imagePath);
+                return ResponseEntity.ok("Изображение " + imageName + " удалено успешно");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Ошибка при удалении изображения");
+        }
+    }
+
+
 }

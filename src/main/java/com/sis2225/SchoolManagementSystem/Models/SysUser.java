@@ -35,6 +35,12 @@ public class SysUser {
     @JsonIgnore
     private School school;
 
+    public SysUser(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
     public School getSchool() {
         return school;
     }
@@ -92,9 +98,11 @@ public class SysUser {
         this.role = role;
     }
 
-    public SysUser(String firstName, String lastName,String role) {
+    public SysUser(String firstName, String lastName,String role,String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
+        this.username = username;
+        this.password = password;
     }
 }
