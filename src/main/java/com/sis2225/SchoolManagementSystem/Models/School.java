@@ -17,7 +17,7 @@ public class School {
     private int rating;
     @Column(name = "name")
     private String name;
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "focus")
@@ -26,7 +26,38 @@ public class School {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "review")
+    private ArrayList<String> review;
 
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<LearnClass> learnClasses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<SysUser> users = new ArrayList<>();
+
+    @Column (name = "imguri")
+    private String imguri;
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setFocus(String focus) {
+        this.focus = focus;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<LearnClass> getLearnClasses() {
+        return learnClasses;
+    }
+
+    public void setLearnClasses(List<LearnClass> learnClasses) {
+        this.learnClasses = learnClasses;
+    }
 
     public String getImguri() {
         return imguri;
@@ -35,13 +66,6 @@ public class School {
     public void setImguri(String imguri) {
         this.imguri = imguri;
     }
-
-    @Column (name = "imguri")
-    private String imguri;
-
-    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SysUser> users = new ArrayList<>();
-
 
     public School() {
     }
@@ -89,13 +113,20 @@ public class School {
     public String getAddress() {
         return address;
     }
+
+    public ArrayList<String> getReview() {
+        return review;
+    }
+
+    public void setReview(ArrayList<String> review) {
+        this.review = review;
+    }
     public School(int rating, String name, String description, String focus, String address, String imguri) {
         this.rating = rating;
         this.name = name;
         this.description = description;
         this.focus = focus;
         this.address = address;
-
         this.imguri = imguri;
     }
 

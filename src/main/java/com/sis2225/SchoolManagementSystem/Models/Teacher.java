@@ -14,11 +14,6 @@ public class Teacher extends SysUser {
     private int age;
     @Column(name = "subject")
     private String subject;
-    @Column(name = "grade")
-    private ArrayList<String> classes;
-
-    @Column(name = "description")
-    private String description;
 
     public Teacher() {
 
@@ -41,30 +36,12 @@ public class Teacher extends SysUser {
         this.subject = subject;
     }
 
-    public ArrayList<String> getClasses() {
-        return classes;
-    }
-
-    public void setClasses(ArrayList<String> classes) {
-        this.classes = classes;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    public Teacher(String firstName, String lastName, int age, String subject, ArrayList<String> classes,
+    public Teacher(String firstName, String lastName, int age, String subject,
                    String description,String username, String password) {
-        super(firstName, lastName, ROLE,username,password);
+        super(firstName, lastName, ROLE, description,username,password);
         this.age = age;
         this.subject = subject;
-        this.classes = classes;
-        this.description = description;
+
     }
 
 }

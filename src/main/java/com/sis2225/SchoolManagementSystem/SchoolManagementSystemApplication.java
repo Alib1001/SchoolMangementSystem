@@ -1,75 +1,90 @@
-	package com.sis2225.SchoolManagementSystem;
+package com.sis2225.SchoolManagementSystem;
 
-	import com.sis2225.SchoolManagementSystem.Models.*;
-	import org.hibernate.Session;
-	import org.hibernate.SessionFactory;
-	import org.hibernate.cfg.Configuration;
-	import org.springframework.boot.SpringApplication;
-	import org.springframework.boot.autoconfigure.SpringBootApplication;
-	import org.springframework.transaction.annotation.EnableTransactionManagement;
+import com.sis2225.SchoolManagementSystem.Models.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-	import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
 
-	@EnableTransactionManagement
-	@SpringBootApplication
-	public class SchoolManagementSystemApplication {
+@EnableTransactionManagement
+@SpringBootApplication
+public class SchoolManagementSystemApplication {
 
-		public static void main(String[] args) {
+	public static void main(String[] args) {
 
-			ArrayList<String> teach1Classes = new ArrayList<>();
-			teach1Classes.add("11A");
-			teach1Classes.add("10B");
-			teach1Classes.add("9Г");
-			Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
-			SessionFactory sessionFactory = configuration.buildSessionFactory();
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-			School gim60School = new School(10,"КГУ Гимназия #60", "Школа на 2500 учеников",
-					"Общий", "Орбита 34","1696054437177_mrhtRPVc.png");
-			School school45 = new School(8, "Общеобразовательная школа #45",
-					"Школа Орбиты 2",
-					"Общее направление", "Орбита 2","1695809025521_LbGKYd64Ye8.jpg");
-			School school40 = new School(9, "Общеобразовательная школа #40",
-					"Школа c каз.языком обучения",
-					"Общее направление", "Орбита 2","1696054501895_pp.jpg");
-			School school5 = new School(3, "Общеобразовательная школа #5",
-					"Общеобразовательная школа",
-					"Общее направление", "КызылОрда","1696054093216_skipper.jpg");
+		String school68Description = "Школа №68 с углубленным изучением немецкого языка в Казахстане – это учебное заведение, которое предоставляет уникальные образовательные возможности для учеников, желающих овладеть навыками немецкого языка на более глубоком уровне. Эта школа является одной из ведущих образовательных учреждений в стране и предоставляет высококачественное образование с акцентом на изучении немецкого языка и культуры.\n" +
+				"\n" +
+				"Школа №68 располагается в живописном месте, где современные учебные здания и удобные классы создают благоприятную образовательную среду. Ученики здесь имеют доступ к современным учебным материалам и технологиям, которые помогают им эффективно изучать немецкий язык и развивать свои интеллектуальные способности.";
 
-			SysUser manager = new Manager();
+		Configuration configuration = new Configuration().configure("hibernate.cfg.xml");
+		SessionFactory sessionFactory = configuration.buildSessionFactory();
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		School gim68School = new School(10,"КГУ Гимназия #68", school68Description,
+				"немецкий язык", "Орбита 2","68_school.png");
+		School rfmsh = new School(8, "Республиканский физико-математический лицей",
+				"углубленное изучение физики и математики",
+				"физика, математика", "бул. Бухар-Жирау 36","rfmsh.png");
+		School ektl = new School(8, "Казахско-Турецский лицей",
+				"школа в Есике",
+				"физика, математика", "бул. Бухар-Жирау 36","ektl.png");
 
-			SysUser student1 = new Student("Alibek", "Nurdaulet",18,"11A",
-					"baka","11111");
-			SysUser student2 = new Student("Baka", "Durachkov",17,"11A",
-					"baka1","11111");
-			SysUser student3 = new Student("Сырна", "Сырный",16,"10B",
-					"baka3","11111");
-			SysUser teacher1 = new Teacher("Физрук","Спортивныч",46,
-					"Физра",teach1Classes, "Не строгий","fizra","1111");
 
-			gim60School.addUser(student1);
-			school5.addUser(student2);
-			school45.addUser(student3);
-			gim60School.addUser(teacher1);
+		SysUser manager = new Manager();
 
-			gim60School.addUser(manager);
+		SysUser student1 = new Student("Alibek", "Nurdaulet","Люблю игры",18,"11A",
+				"baka","11111");
 
-			session.persist(manager);
+		SysUser teacher1 = new Teacher("Физрук","Спортивныч",46,
+				"Физра", "Люблю спорт","fizra","1111");
 
-			session.persist(student1);
-			session.persist(student3);
-			session.persist(student2);
+		LearnSubject math = new LearnSubject();
+		math.setName("Math");
 
-			session.persist(teacher1);
+		ArrayList<LearnSubject> subjects = new ArrayList();
+		subjects.add(math);
 
-			session.persist(gim60School);
-			session.persist(school45);
-			session.persist(school40);
-			session.persist(school5);
-			session.getTransaction().commit();
-			session.close();
+		LearnClass A11 = new LearnClass();
+		A11.setName("11A");
+		A11.setSchool(gim68School);
+		A11.setSubjects(subjects);
 
-			SpringApplication.run(SchoolManagementSystemApplication.class, args);
-		}
+		Mark mark = new Mark();
+		mark.setSubject(math);
+		mark.setScore(1);
 
+		mark.setStudent((Student) student1);
+
+		gim68School.addUser(student1);
+		gim68School.addUser(teacher1);
+		gim68School.addUser(manager);
+
+		session.persist(math);
+		session.persist(A11);
+		session.persist(mark);
+
+		session.persist(manager);
+
+		session.persist(student1);
+
+
+		session.persist(teacher1);
+
+		session.persist(gim68School);
+		session.persist(rfmsh);
+		session.persist(ektl);
+		session.getTransaction().commit();
+		session.close();
+
+
+
+
+		SpringApplication.run(SchoolManagementSystemApplication.class, args);
 	}
+
+}

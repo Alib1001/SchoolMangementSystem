@@ -30,6 +30,9 @@ public class SysUser {
     @Column(name = "role")
     private String role;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "school_id")  // This should match the name of the foreign key column in the students table
     @JsonIgnore
@@ -98,11 +101,20 @@ public class SysUser {
         this.role = role;
     }
 
-    public SysUser(String firstName, String lastName,String role,String username, String password) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public SysUser(String firstName, String lastName,String role, String description,String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.username = username;
         this.password = password;
+        this.description = description;
     }
 }

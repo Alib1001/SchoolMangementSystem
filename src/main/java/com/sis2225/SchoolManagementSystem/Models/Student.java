@@ -1,60 +1,66 @@
 package com.sis2225.SchoolManagementSystem.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "students")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Student extends SysUser {
 
     private final static String ROLE = "Student";
 
     @Column(name = "age")
     private int age;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "class_id")
 
-    public String getClas() {
-        return clas;
-    }
+    private LearnClass learnClass;
 
-    public void setClas(String clas) {
-        this.clas = clas;
-    }
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 
-    @Column(name = "clas")
-    private String clas;
+    private List<Mark> marks = new ArrayList<>();
 
-    @Column(name = "description")
-    private String description;
 
     public Student() {
     }
 
+    public LearnClass getLearnClass() {
+        return learnClass;
+    }
+
+    public void setLearnClass(LearnClass learnClass) {
+        this.learnClass = learnClass;
+    }
+
+    public List<Mark> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(List<Mark> marks) {
+        this.marks = marks;
+    }
     public int getAge() {
         return age;
-    }
-
-    public String getGrade() {
-        return clas;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
 
-    public void setGrade(String grade) {
-        this.clas = grade;
+    public String getRole(){
+        return ROLE;
     }
 
-    public Student(String firstName, String lastName, int age, String clas,String username, String password) {
-        super(firstName, lastName,ROLE,username,password);
+
+
+    public Student(String firstName, String lastName, String description, int age, String clas,String username, String password) {
+        super(firstName, lastName ,ROLE, description, username,password);
         this.age = age;
-        this.clas = clas;
+
     }
 }

@@ -15,13 +15,13 @@
         <property name="current_session_context_class">thread</property>
 
         <property name="hibernate.hbm2ddl.auto">create</property>
-
         <mapping class="com.sis2225.SchoolManagementSystem.Models.School"/>
         <mapping class="com.sis2225.SchoolManagementSystem.Models.Student"/>
         <mapping class="com.sis2225.SchoolManagementSystem.Models.SysUser"/>
         <mapping class="com.sis2225.SchoolManagementSystem.Models.Teacher"/>
         <mapping class="com.sis2225.SchoolManagementSystem.Models.Manager"/>
-
-
+        <mapping class="com.sis2225.SchoolManagementSystem.Models.Mark"/>
+        <mapping class="com.sis2225.SchoolManagementSystem.Models.LearnClass"/>
+        <mapping class="com.sis2225.SchoolManagementSystem.Models.LearnSubject"/>
     </session-factory>
 </hibernate-configuration>
