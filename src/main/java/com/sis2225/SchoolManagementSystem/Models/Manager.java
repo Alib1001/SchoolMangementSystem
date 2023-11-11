@@ -11,4 +11,5 @@ public class Manager extends SysUser{
     public Manager() {
         super(username,password,ROLE);
     }
+
 }

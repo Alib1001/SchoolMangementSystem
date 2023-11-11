@@ -8,14 +8,14 @@ import jakarta.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class SysUser {
     public SysUser(){
-
     }
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private int id;
-
+    @Column(name = "userid")
+    private int userid;
     @Column (name = "firstname")
     String firstName;
 
@@ -34,7 +34,7 @@ public class SysUser {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "school_id")  // This should match the name of the foreign key column in the students table
+    @JoinColumn(name = "schoolId")
     @JsonIgnore
     private School school;
 
@@ -61,12 +61,12 @@ public class SysUser {
     }
 
 
-    public int getId() {
-        return id;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getFirstName() {

@@ -8,11 +8,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "students")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userid")
 public class Student extends SysUser {
-
     private final static String ROLE = "Student";
-
     @Column(name = "age")
     private int age;
     @ManyToOne
@@ -20,7 +18,6 @@ public class Student extends SysUser {
     @JoinColumn(name = "class_id")
 
     private LearnClass learnClass;
-
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 
     private List<Mark> marks = new ArrayList<>();

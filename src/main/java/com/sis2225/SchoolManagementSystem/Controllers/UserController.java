@@ -53,7 +53,7 @@
             try {
                 SysUser existingUser = sysUserDAO.getUserById(id);
                 if (existingUser != null) {
-                    updatedUser.setId(id);
+
                     sysUserDAO.updateUser(updatedUser);
                     return ResponseEntity.ok().build();
                 } else {
