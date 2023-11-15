@@ -19,6 +19,10 @@ public class SysUser {
     @Column (name = "firstname")
     String firstName;
 
+    @Column (name = "idSchool")
+    private int idSchool;
+
+
     @Column(name = "lastName")
     private String lastName;
     @Column(name = "username")
@@ -34,7 +38,7 @@ public class SysUser {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "schoolId")
+    @JoinColumn(name = "schoolid")
     @JsonIgnore
     private School school;
 
@@ -109,6 +113,14 @@ public class SysUser {
         this.description = description;
     }
 
+    public int getIdSchool() {
+        return idSchool;
+    }
+
+    public void setIdSchool(int idSchool) {
+        this.idSchool = idSchool;
+    }
+
     public SysUser(String firstName, String lastName,String role, String description,String username, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -116,5 +128,7 @@ public class SysUser {
         this.username = username;
         this.password = password;
         this.description = description;
+
     }
+
 }
